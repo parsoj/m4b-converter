@@ -13,6 +13,11 @@ elif sys.platform.startswith('win'):
     if not os.path.isfile(p):
         p = 'libmp4v2.dll'
     dll = ctypes.CDLL(p)
+elif sys.platform.startswith('darwin'):
+    try:
+        dll = ctypes.CDLL('/usr/local/lib/libmp4v2.2.dylib')
+    except OSError:
+        dll = ctypes.CDLL('/usr/local/lib/libmp4v2.dylib')
 else:
     raise NotImplementedError('O/S %r not supported' % sys.platform)
 
